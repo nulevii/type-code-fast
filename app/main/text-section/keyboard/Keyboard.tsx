@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import Split from 'react-split'
 import SimpleKeyboard from 'react-simple-keyboard'
 import 'react-simple-keyboard/build/css/index.css'
 
 const Keyboard = () => {
   const [input, setInput] = React.useState('')
   const [layoutName, setLayoutName] = React.useState('default')
+  const [gutterColor, setGutterColor] = React.useState('transperent')
 
   const commonKeyboardOptions = {
     onChange: input => { onChange(input) },
@@ -26,7 +28,7 @@ const Keyboard = () => {
       default: [
         '{escape} {f1} {f2} {f3} {f4} {f5} {f6} {f7} {f8} {f9} {f10} {f11} {f12}',
         '` 1 2 3 4 5 6 7 8 9 0 - = {backspace}',
-        '{tab} q W E R T Y U I O P [ ] \\',
+        '{tab} Q W E R T Y U I O P [ ] \\',
         "{capslock} A S D F G H J K L ; ' {enter}",
         '{shiftleft} Z X C V B N M , . / {shiftright}',
         '{controlleft} {altleft} {metaleft} {space} {metaright} {altright}'
@@ -34,7 +36,7 @@ const Keyboard = () => {
       shift: [
         '{escape} {f1} {f2} {f3} {f4} {f5} {f6} {f7} {f8} {f9} {f10} {f11} {f12}',
         '~ ! @ # $ % ^ &amp; * ( ) _ + {backspace}',
-        '{tab} q W E R T Y U I O P [ ] \\',
+        '{tab} Q W E R T Y U I O P [ ] \\',
         "{capslock} A S D F G H J K L ; ' {enter}",
         '{shiftleft} Z X C V B N M , . / {shiftright}',
         '{controlleft} {altleft} {metaleft} {space} {metaright} {altright}'
@@ -106,7 +108,7 @@ const Keyboard = () => {
     }
   }
 
-  const onChange = input => {
+  const onChange = (input) => {
     setInput(
       input
     )
@@ -140,45 +142,59 @@ const Keyboard = () => {
   }
 
   return (
-      <div>
-        <input
-          value={input}
-          placeholder={'Tap on the virtual keyboard to start'}
-          onChange={e => { console.log(e); onChangeInput(e) }}
-          onKeyDown={e => { e.shiftKey && handleShift() }}
-          // onKeyUp={e => { e.key === 'Shift' && handleShift() }}
+    <Split
+      minSize={5}
+      className=' flex-col h-full'
+      direction='vertical'
+      onDragStart={() => {
+        setGutterColor('#007fd4')
+      }}
+      onDragEnd={(sizes) => {
+        setGutterColor('transperent')
+      }}
+      style={{ ['--gutter-background' as string]: 'transparent' }}
+      gutterSize={5}
+      cursor="n-resize"
+      snapOffset={50}
+    >
+      <input
+        value={input}
+        placeholder={'Tap on the virtual keyboard to start'}
+        onChange={e => { console.log(e); onChangeInput(e) }}
+        onKeyDown={e => { e.shiftKey && handleShift() }}
+      // onKeyUp={e => { e.key === 'Shift' && handleShift() }}
+      />
+      <div className={'keyboardContainer'}>
+        <SimpleKeyboard
+          baseClass={'simple-keyboard-main'}
+          // keyboardRef={r => (keyboard = r)}
+          layoutName={layoutName}
+          {...keyboardOptions}
         />
-        <div className={'keyboardContainer'}>
+
+        <div className="controlArrows">
           <SimpleKeyboard
-            baseClass={'simple-keyboard-main'}
-            // keyboardRef={r => (keyboard = r)}
-            layoutName={layoutName}
-            {...keyboardOptions}
+            baseClass={'simple-keyboard-control'}
+            {...keyboardControlPadOptions}
           />
+          <SimpleKeyboard
+            baseClass={'simple-keyboard-arrows'}
+            {...keyboardArrowsOptions}
+          />
+        </div>
 
-          <div className="controlArrows">
-            <SimpleKeyboard
-              baseClass={'simple-keyboard-control'}
-              {...keyboardControlPadOptions}
-            />
-            <SimpleKeyboard
-              baseClass={'simple-keyboard-arrows'}
-              {...keyboardArrowsOptions}
-            />
-          </div>
-
-          <div className="numPad">
-            <SimpleKeyboard
-              baseClass={'simple-keyboard-numpad'}
-              {...keyboardNumPadOptions}
-            />
-            <SimpleKeyboard
-              baseClass={'simple-keyboard-numpadEnd'}
-              {...keyboardNumPadEndOptions}
-            />
-          </div>
+        <div className="numPad">
+          <SimpleKeyboard
+            baseClass={'simple-keyboard-numpad'}
+            {...keyboardNumPadOptions}
+          />
+          <SimpleKeyboard
+            baseClass={'simple-keyboard-numpadEnd'}
+            {...keyboardNumPadEndOptions}
+          />
         </div>
       </div>
+    </Split >
   )
 }
 

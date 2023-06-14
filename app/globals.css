@@ -20,10 +20,17 @@ body {
 }
 
 .gutter {
-  cursor: e-resize;
   background: var(--gutter-background);
-
 }
+
+.gutter-horizontal {
+  cursor: e-resize;
+}
+
+.gutter-vertical {
+  cursor: n-resize;
+}
+
 .gutter:hover {
   background: #007fd4;
   transition-property: 'background';
@@ -42,6 +49,7 @@ input {
 
 .simple-keyboard {
   /* max-width: 850px; */
+
 }
 
 input {
@@ -54,20 +62,24 @@ input {
 }
 
 .keyboardContainer {
+  /* outline: 2px solid greenyellow; */
+  max-height: 280px;
+  width: 640px;
   display: flex;
   background-color: rgba(0, 0, 0, 0.1);
   justify-content: center;
-  width: 1024px;
-  margin: 0 auto;
+  width: auto;
+  margin: 10px auto 0;
   border-radius: 5px;
   font-size: 12px;
 }
 
 .simple-keyboard.hg-theme-default {
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .simple-keyboard-main.simple-keyboard {
+  /* background-color: #007fd4 !important; */
   width: 640px;
   min-width: 640px;
   background: none;
@@ -78,6 +90,7 @@ input {
 }
 
 .simple-keyboard-arrows.simple-keyboard {
+  /* background-color: #12eecd !important; */
   align-self: flex-end;
   background: none;
 }
@@ -107,6 +120,7 @@ input {
 }
 
 .controlArrows {
+  min-height: 280px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -114,6 +128,7 @@ input {
 }
 
 .simple-keyboard-control.simple-keyboard {
+  /* background-color: #b534e8 !important; */
   background: none;
 }
 
@@ -130,11 +145,13 @@ input {
 }
 
 .numPad {
+  min-height: 280px;
   display: flex;
   align-items: flex-end;
 }
 
 .simple-keyboard-numpad.simple-keyboard {
+  /* background-color: #17ee77 !important; */
   background: none;
 }
 
@@ -150,6 +167,7 @@ input {
 }
 
 .simple-keyboard-numpadEnd.simple-keyboard {
+  /* background-color: #c3db0f !important; */
   width: 50px;
   background: none;
   margin: 0;
@@ -183,7 +201,7 @@ input {
 
 input {
   width: 100%;
-  height: 100px;
+  min-height: 100px;
   padding: 20px;
   font-size: 20px;
   border: none;
@@ -197,14 +215,12 @@ input {
 .simple-keyboard.hg-theme-default.myTheme {
   border-radius: 10px;
   border-radius: 0;
-  background:  rgb(30, 30, 30);
+  background: rgb(30, 30, 30);
 }
 
 .simple-keyboard.hg-layout-default .hg-button {
-  background:rgb(60, 60, 60);
+  background: rgb(60, 60, 60);
   border: 0;
   color: white;
   border-radius: 0;
 }
-
-

@@ -8,7 +8,7 @@ const Main = (): JSX.Element => {
   const [gutterColor, setGutterColor] = useState('transperent')
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(true)
   return (
-    <main className="flex w-full h-screen">
+    <main className="flex w-full h-screen overflow-hidden">
       <Split
         collapsed={5}
         onDragStart={() => {
@@ -33,10 +33,10 @@ const Main = (): JSX.Element => {
         gutterSize={5}
         cursor="e-resize"
         className="flex w-full"
-        snapOffset={140}
+        snapOffset={130}
       >
-          <TextSection />
-        <SideMenu setIsSideMenuOpen={setIsSideMenuOpen} isSideMenuOpen={isSideMenuOpen}/>
+        <TextSection />
+        <SideMenu setIsSideMenuOpen={setIsSideMenuOpen} isSideMenuOpen={isSideMenuOpen} />
       </Split>
     </main>
   )
