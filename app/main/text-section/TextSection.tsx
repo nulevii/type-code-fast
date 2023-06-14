@@ -5,7 +5,7 @@ import { Keyboard } from './keyboard'
 
 const TextSection = () => {
   return (
-    <section className='flex-grow w-full flex flex-col'>
+    <section className='flex-grow w-full flex flex-col' >
       <TextWindow />
       <Keyboard />
     </section>
